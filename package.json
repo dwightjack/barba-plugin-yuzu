@@ -1,0 +1,15 @@
+{
+  "name": "barba2-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^1.12.2"
+  },
+  "dependencies": {
+    "@barba/core": "^2.1.1-next.77",
+    "gsap": "^2.1.2",
+    "yuzu": "^2.0.0-rc.13",
+    "yuzu-application": "^2.0.0-rc.12"
+  }
+}
