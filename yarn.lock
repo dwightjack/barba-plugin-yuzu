@@ -1855,7 +1855,7 @@ duplexer2@~0.1.4:
   dependencies:
     readable-stream "^2.0.2"
 
-"dush@github:superguigui/dush#reference-based-offing", dush@superguigui/dush#reference-based-offing:
+dush@superguigui/dush#reference-based-offing:
   version "3.0.5"
   resolved "https://codeload.github.com/superguigui/dush/tar.gz/280fe94b52f93b9d6a35d8ec45a6a6d964ccf0f1"
 
@@ -5173,19 +5173,12 @@ yallist@^3.0.0, yallist@^3.0.2:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.3.tgz#b4b049e314be545e3ce802236d6cd22cd91c3de9"
   integrity sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A==
 
-yuzu-application@^2.0.0-rc.12:
-  version "2.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/yuzu-application/-/yuzu-application-2.0.0-rc.12.tgz#a85508c6f6bcd77c5016f9937a37cfee707075dc"
-  integrity sha512-vZcxQjvV10eGcd7NLVegmNkeuyYNFMAjVKC3/yU4+Tvdmk84/3GbywSYe/0azQZV7oR9GEIKKEiJO5efZE4CHA==
+yuzu-application@^2.0.0-rc.13:
+  version "2.0.0-rc.13"
+  resolved "https://registry.yarnpkg.com/yuzu-application/-/yuzu-application-2.0.0-rc.13.tgz#a82da3021c70bab5bd07f7114da6656494b3e465"
+  integrity sha512-DsweF9f8OlTdQyInWxkKIfrKbUhDCZ+au5RcNBZE2XJyXRl62M5M6N+XsXdaeevGRgas4eoPNeF+XSL9KH8u6g==
   dependencies:
-    yuzu-utils "^2.0.0-rc.12"
-
-yuzu-utils@^2.0.0-rc.12:
-  version "2.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/yuzu-utils/-/yuzu-utils-2.0.0-rc.12.tgz#94eb6f2f4c371ab01e66014110c2e23c56335b24"
-  integrity sha512-f6EQ9x+sOrblm0nQyMSX771ox0ZA8s0IyxM1jpc4wvXYCkZKCPr/WIPoiuX8eYeOgT/Iw/ffMiq9RH0WzqT1lA==
-  dependencies:
-    dush superguigui/dush#reference-based-offing
+    yuzu-utils "^2.0.0-rc.13"
 
 yuzu-utils@^2.0.0-rc.13:
   version "2.0.0-rc.13"
