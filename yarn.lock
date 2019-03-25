@@ -638,10 +638,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@barba/core@^2.1.1-next.77":
-  version "2.1.1-next.77"
-  resolved "https://registry.yarnpkg.com/@barba/core/-/core-2.1.1-next.77.tgz#994a268851c784a731f0a72936d75445ec4b3322"
-  integrity sha512-stmdpiguiDdD3Q4lx+jtWDVwt2ZxIYYEyeLQWQk4Gg17e3OgWjPYMYbEcEPSDIJTtYJwB8P8UPlpiN+83elHyA==
+"@barba/core@^2.1.1-next.89":
+  version "2.1.1-next.89"
+  resolved "https://registry.yarnpkg.com/@barba/core/-/core-2.1.1-next.89.tgz#4adf58f6de72381688e21088aff0861fddebca9c"
+  integrity sha512-VcKhm+bP9aRqywIP/ysT6LOm8+WCza7ZdTP38BXGbzO2nqGKsoDSINyAj2jEoVUdZYg2eBdAAEkJJprooITIXg==
   dependencies:
     path-to-regexp "^3.0.0"
     run-async "^2.3.0"

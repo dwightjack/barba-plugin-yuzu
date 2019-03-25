@@ -14,7 +14,7 @@ export const yuzuPlugin = {
   parseViews(view, namespace) {
     const { component: ViewComponent, options = {} } = view;
 
-    function destroy(page = {}) {
+    function destroy(page) {
       const { $yuzuContainer } = page;
       if ($yuzuContainer) {
         return $yuzuContainer.destroy().then(() => {
@@ -24,11 +24,12 @@ export const yuzuPlugin = {
       return Promise.resolve();
     }
 
-    function mount(page = {}) {
+    function mount(page) {
       return destroy(page).then(() => {
         const { container, ...data } = page;
         Object.defineProperty(page, '$yuzuContainer', {
           enumerable: false,
+          configurable: true,
           value: new ViewComponent({ ...options, data }).mount(container)
         });
       });
@@ -40,14 +41,14 @@ export const yuzuPlugin = {
 
     return Object.assign(view, {
       namespace,
-      beforeAppear({ current }) {
-        return mount(current);
+      beforeEnter({ next = {}, current = {} }) {
+        if (next.namespace === namespace && next.container) {
+          return mount(next);
+        }
+        return current.namespace === namespace && mount(current);
       },
-      beforeEnter({ next }) {
-        return mount(next);
-      },
-      beforeLeave({ current }) {
-        return destroy(current);
+      beforeLeave({ current = {} }) {
+        return current.namespace === namespace && destroy(current);
       }
     });
   }
