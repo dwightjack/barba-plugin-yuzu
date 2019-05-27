@@ -1,8 +1,10 @@
 import { Component } from 'yuzu';
 
-export class View extends Component {}
-
-View.defaultOptions = () => ({ data: {} });
+export class View extends Component {
+  defaultOptions() {
+    return { data: {} }
+  }
+}
 
 export const yuzuPlugin = {
   install(core, { views = [] } = {}) {
