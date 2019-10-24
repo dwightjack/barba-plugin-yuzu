@@ -1,71 +1,56 @@
-import barba from '@barba/core';
-import { TweenMax } from 'gsap';
-import { Component, devtools } from 'yuzu';
-import { Sandbox } from 'yuzu-application';
-import { yuzuPlugin, View } from './yuzu-plugin-barba';
-devtools(Component);
+import { Component } from 'yuzu';
 
-class Counter extends Component {
-  created() {
-    this.state = {
-      count: 0
-    };
+export class View extends Component {
+  defaultOptions() {
+    return { data: {} };
+  }
+}
 
-    this.actions = {
-      count: v => {
-        this.$el.textContent = v;
+export const yuzuPlugin = {
+  install(core) {
+    this.$core = core;
+  },
+  init() {
+    this.$core.views.byNamespace.forEach(this.parseViews, this);
+  },
+  parseViews(view, namespace) {
+    const { component: ViewComponent, options = {} } = view;
+
+    function destroy(page) {
+      const { $yuzuContainer } = page;
+      if ($yuzuContainer) {
+        return $yuzuContainer.destroy().then(() => {
+          delete page.$yuzuContainer;
+        });
       }
-    };
-  }
-
-  mounted() {
-    this.interval = setInterval(() => {
-      this.setState(({ count }) => ({ count: count + 1 }));
-    }, 1000);
-  }
-
-  beforeDestroy() {
-    if (this.interval) {
-      clearInterval(this.interval);
+      return Promise.resolve();
     }
-  }
-}
 
-const animate = (el, duration, props) =>
-  new Promise(resolve => {
-    TweenMax.to(el, duration, { ...props, onComplete: () => resolve() });
-  });
+    function mount(page) {
+      return destroy(page).then(() => {
+        const { container, ...data } = page;
+        Object.defineProperty(page, '$yuzuContainer', {
+          configurable: true,
+          value: new ViewComponent({ ...options, data }).mount(container),
+        });
+      });
+    }
 
-class HomeView extends View {
-  created() {
-    this.selectors = {
-      counter: '.counter'
-    };
-  }
-  initialize() {
-    this.setRef({
-      component: Counter,
-      el: this.$els.counter,
-      id: 'counter'
-    });
-  }
-}
+    if (!Component.isComponent(ViewComponent)) {
+      return view;
+    }
 
-barba.use(yuzuPlugin);
-
-barba.init({
-  debug: true,
-  transitions: [
-    {
-      name: 'fade',
-      leave({ current }) {
-        return animate(current.container, 0.5, { autoAlpha: 0 });
+    return Object.assign(view, {
+      namespace,
+      beforeEnter({ next = {}, current = {} }) {
+        if (next.namespace === namespace && next.container) {
+          return mount(next);
+        }
+        return current.namespace === namespace && mount(current);
       },
-      enter({ next }) {
-        TweenMax.set(next.container, { autoAlpha: 0 });
-        return animate(next.container, 0.5, { autoAlpha: 1 });
-      }
-    }
-  ],
-  views: [{ component: HomeView, namespace: 'home' }]
-});
+      beforeLeave({ current = {} }) {
+        return current.namespace === namespace && destroy(current);
+      },
+    });
+  },
+};
