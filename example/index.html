@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Homepage</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div data-barba="wrapper">
-      <p>
+    <div class="wrapper" data-barba="wrapper">
+      <nav class="nav">
         <a href="/index.html">Home</a>
         <a href="/about.html">About</a>
-      </p>
-      <main data-barba="container" data-barba-namespace="home">
+      </nav>
+      <main class="page" data-barba="container" data-barba-namespace="home">
         <h1>Homepage</h1>
-        <div class="counter"></div>
+        <div class="timer">Elapsed: <span class="timer__elapsed"></span></div>
       </main>
     </div>
     <script src="src/index.js"></script>

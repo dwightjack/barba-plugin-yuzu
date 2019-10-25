@@ -1,21 +1,25 @@
 import { Component } from 'yuzu';
 
-export class Counter extends Component {
+export class Timer extends Component {
   created() {
     this.state = {
-      count: 0,
+      elapsed: 0,
+    };
+
+    this.selectors = {
+      elapsed: '.timer__elapsed',
     };
 
     this.actions = {
-      count: (v) => {
-        this.$el.textContent = v;
+      elapsed: (v) => {
+        this.$els.elapsed.textContent = v;
       },
     };
   }
 
   mounted() {
     this.interval = setInterval(() => {
-      this.setState(({ count }) => ({ count: count + 1 }));
+      this.setState(({ elapsed }) => ({ elapsed: elapsed + 1 }));
     }, 1000);
   }
 
